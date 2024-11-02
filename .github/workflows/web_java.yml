@@ -9,7 +9,7 @@ jobs:
     steps:
       # Step 1: Check out the repository to get the source code
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Step 2: Set up JDK 11, as the app is written in Java 11
       - name: Set up JDK 11
@@ -24,7 +24,7 @@ jobs:
 
       # Step 4: Upload the build artifacts (packaged app file) for use in other jobs
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: web-app
           path: target/*.jar
@@ -36,7 +36,7 @@ jobs:
     steps:
       # Step 1: Check out the repository to get the source code
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
      # Step 2: Set up JDK 11, as the app is written in Java 11
       - name: Set up JDK 11
@@ -48,7 +48,7 @@ jobs:
 
       # Step 3: Download the build artifacts from the build job
       - name: Download build artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: web-app
 
@@ -94,11 +94,11 @@ jobs:
     steps:
       # Step 1: Check out the repository to get the source code
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Step 2: Download the build artifacts from the build job
       - name: Download build artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: web-app
 
