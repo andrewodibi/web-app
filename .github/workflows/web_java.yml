@@ -19,8 +19,10 @@ jobs:
           java-version: '11'
 
       # Step 3: Build the Java app using Maven
+      - name: Build Java app with Maven
+        run: mvn clean package .
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B package .
 
       # Step 4: Upload the build artifacts (packaged app file) for use in other jobs
       - name: Upload build artifacts
