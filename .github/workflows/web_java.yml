@@ -67,8 +67,9 @@ jobs:
       # Step 6: Run SonarQube scan on the Java app project to check code quality
       - name: Run SonarQube scan
         run: |
+          docker exec -it sonarqube sonar-scanner \
           sonar-scanner \
-          -Dsonar.projectKey=my-web-app \
+          -Dsonar.projectKey=web-app \
           -Dsonar.sources=./src \
           -Dsonar.host.url=http://localhost:9000 \
           -Dsonar.login=admin \
@@ -78,7 +79,7 @@ jobs:
       - name: Check Quality Gate status
         run: |
           # Fetch the Quality Gate result for the project
-          STATUS=$(curl -s -u admin:admin "http://localhost:9000/api/qualitygates/project_status?projectKey=my-web-app" | jq -r .projectStatus.status)
+          STATUS=$(curl -s -u admin:admin "http://localhost:9000/api/qualitygates/project_status?projectKey=web-app" | jq -r .projectStatus.status)
           if [ "$STATUS" != "OK" ]; then
             echo "Quality Gate failed!"
             exit 1  # Fail the workflow if the Quality Gate status is not OK
@@ -107,7 +108,7 @@ jobs:
       # Step 3: Build Docker image for the app
       - name: Build Docker image
         run: |
-          docker build -t my-web-app .
+          docker build -t web-app .
       
       # list all images
       - name: List all images
@@ -116,4 +117,4 @@ jobs:
       # Step 4: Deploy the Docker container to run the app on port 80
       - name: Deploy Docker container
         run: |
-          docker run -d -p 80:8080 my-web-app
+          docker run -d -p 80:8080 web-app
