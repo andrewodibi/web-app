@@ -78,7 +78,7 @@ jobs:
       - name: Run SonarQube scan
         run: |
           
-          sonar-scanner \
+          sonar-scanner -X \
           -Dsonar.projectKey=web-app \
           -Dsonar.sources=./src \
           -Dsonar.host.url=http://localhost:9000 \
