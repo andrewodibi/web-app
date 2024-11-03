@@ -54,16 +54,14 @@ jobs:
         with:
           name: artifact
 
-      # Step 4: Set up and run SonarQube in a Docker container
-      - name: Set up SonarQube
+        # Step 4: Download and start SonarQube server
+      - name: Download and start SonarQube server
         run: |
-          docker pull sonarqube  # Pull SonarQube image from Docker Hub
-          docker run -d --name sonarqube -p 9000:9000 sonarqube  # Run SonarQube in detached mode on port 9000
-
-      # Step 5: Wait for SonarQube to start (30 seconds delay to ensure it's ready)
-      - name: Wait for SonarQube to start
-        run: sleep 30
-
+          wget -q -O sonarqube.zip https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.1.69595.zip
+          unzip sonarqube.zip
+          ./sonarqube-9.9.1.69595/bin/linux-x86-64/sonar.sh start
+          sleep 30  # Wait for SonarQube to start up
+          
          # Step 5: Install SonarQube Scanner on the runner
       - name: Install SonarQube Scanner
         run: |
