@@ -60,7 +60,7 @@ jobs:
           wget -q -O sonarqube.zip https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.1.69595.zip
           unzip sonarqube.zip
           ./sonarqube-9.9.1.69595/bin/linux-x86-64/sonar.sh start
-          sleep 30  # Wait for SonarQube to start up
+          sleep 60  # Wait for SonarQube to start up
           
          # Step 5: Install SonarQube Scanner on the runner
       - name: Install SonarQube Scanner
