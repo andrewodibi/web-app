@@ -81,7 +81,7 @@ jobs:
           sonar-scanner -X \
           -Dsonar.projectKey=web-app \
           -Dsonar.sources=./src \
-          -Dsonar.host.url=http://localhost:9000 \
+          -Dsonar.host.url=http://127.0.0.1:9000 \
           -Dsonar.login=admin \
           -Dsonar.password=admin
         env:
