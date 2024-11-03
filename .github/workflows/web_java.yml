@@ -64,10 +64,18 @@ jobs:
       - name: Wait for SonarQube to start
         run: sleep 30
 
+         # Step 5: Install SonarQube Scanner on the runner
+      - name: Install SonarQube Scanner
+        run: |
+          wget -q -O sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+          unzip sonar-scanner.zip
+          mv sonar-scanner-4.6.2.2472-linux sonar-scanner
+          export PATH="$PATH:${{ github.workspace }}/sonar-scanner/bin"
+
+
       # Step 6: Run SonarQube scan on the Java app project to check code quality
       - name: Run SonarQube scan
         run: |
-          docker exec sonarqube sonar-scanner \
           sonar-scanner \
           -Dsonar.projectKey=web-app \
           -Dsonar.sources=./src \
